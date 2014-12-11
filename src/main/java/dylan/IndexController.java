@@ -17,7 +17,7 @@ public class IndexController {
     public
     @ResponseBody
     ResponseEntity<String> welcome() {
-        return new ResponseEntity<>("OK", HttpStatus.OK);
+        return new ResponseEntity<String>("OK", HttpStatus.OK);
 
     }
 }
