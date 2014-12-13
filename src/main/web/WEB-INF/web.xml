@@ -5,26 +5,33 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
-       <display-name>Dylan Web Application</display-name>
+    <display-name>Dylan Web Application</display-name>
 
-       <servlet>
-              <servlet-name>mvc-dispatcher</servlet-name>
-              <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-              <load-on-startup>1</load-on-startup>
-       </servlet>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <!-- 主要是加载业务层和持久层的 Spring 配置文件 -->
+        <param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
+    </context-param>
 
-       <servlet-mapping>
-              <servlet-name>mvc-dispatcher</servlet-name>
-              <url-pattern>/</url-pattern>
-       </servlet-mapping>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
-       <listener>
-              <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-       </listener>
+    <servlet>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <!-- 默认自动加载 <servletName>-servlet.xml -->
+            <!-- 显式配置，注意不放在 context-param -->
+            <param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 
-       <context-param>
-              <param-name>contextConfigLocation</param-name>
-              <param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
-       </context-param>
+    <servlet-mapping>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
 </web-app>
